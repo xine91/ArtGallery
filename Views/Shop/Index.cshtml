@@ -1,0 +1,47 @@
+@model IEnumerable<ArtGallery.Models.Painting>
+@{
+    ViewBag.Title = ViewBag.Loc["Shop"];
+}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">@ViewBag.Loc["Shop"]</h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="filters">
+            <span class="filter-label">@ViewBag.Loc["Categories"]:</span>
+            <div class="filter-buttons">
+                <a href="/Shop" class="filter-btn @(ViewBag.CurrentCategory == "All" ? "active" : "")">@ViewBag.Loc["All"]</a>
+                <a href="/Shop?category=Landscapes" class="filter-btn @(ViewBag.CurrentCategory == "Landscapes" ? "active" : "")">@ViewBag.Loc["Landscapes"]</a>
+                <a href="/Shop?category=Portraits" class="filter-btn @(ViewBag.CurrentCategory == "Portraits" ? "active" : "")">@ViewBag.Loc["Portraits"]</a>
+                <a href="/Shop?category=Abstract" class="filter-btn @(ViewBag.CurrentCategory == "Abstract" ? "active" : "")">@ViewBag.Loc["Abstract"]</a>
+                <a href="/Shop?category=StillLife" class="filter-btn @(ViewBag.CurrentCategory == "StillLife" ? "active" : "")">@ViewBag.Loc["StillLife"]</a>
+            </div>
+        </div>
+
+        <div class="paintings-grid shop-grid">
+            @foreach (var painting in Model)
+            {
+                <div class="painting-card shop-card">
+                    <div class="painting-image">
+                        <img src="@painting.ImageUrl" alt="@painting.GetTitle(ViewBag.Culture)" onerror="this.src='/images/placeholder.jpg'" />
+                        <div class="painting-overlay">
+                            <button class="btn btn-small add-to-cart" data-id="@painting.Id">@ViewBag.Loc["AddToCart"]</button>
+                        </div>
+                    </div>
+                    <div class="painting-info">
+                        <h3 class="painting-title">@painting.GetTitle(ViewBag.Culture)</h3>
+                        <p class="painting-meta">@painting.Size • @painting.GetTechnique(ViewBag.Culture)</p>
+                        <div class="painting-footer">
+                            <span class="painting-price">@painting.Price.ToString("N0") @ViewBag.Loc["Currency"]</span>
+                            <a href="/Shop/Details/@painting.Id" class="details-link">@ViewBag.Loc["Details"] →</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

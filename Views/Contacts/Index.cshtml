@@ -1,0 +1,92 @@
+@model ArtGallery.Models.ContactViewModel
+@{
+    ViewBag.Title = ViewBag.Loc["Contacts"];
+}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">@ViewBag.Loc["ContactUs"]</h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="contacts-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <div>
+                        <h3>@ViewBag.Loc["Address"]</h3>
+                        <p>Prien am Chiemsee, 83209</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    <div>
+                        <h3>@ViewBag.Loc["Phone"]</h3>
+                        <p>+380 68 737 9025</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <div>
+                        <h3>@ViewBag.Loc["Email"]</h3>
+                        <p>mykolabursa@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <div>
+                        <h3>@ViewBag.Loc["WorkingHours"]</h3>
+                        <p>@(ViewBag.Culture == "de" ? "Mo-Fr: 10:00 - 19:00" : ViewBag.Culture == "en" ? "Mon-Fri: 10:00 - 19:00" : ViewBag.Culture == "uk" ? "Пн-Пт: 10:00 - 19:00" : "Пн-Пт: 10:00 - 19:00")</p>
+                        <p>@(ViewBag.Culture == "de" ? "Sa-So: 11:00 - 17:00" : ViewBag.Culture == "en" ? "Sat-Sun: 11:00 - 17:00" : ViewBag.Culture == "uk" ? "Сб-Нд: 11:00 - 17:00" : "Сб-Вс: 11:00 - 17:00")</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form-container">
+                <form asp-action="Index" method="post" class="contact-form">
+                    <div class="form-group">
+                        <label asp-for="Name">@ViewBag.Loc["Name"]</label>
+                        <input asp-for="Name" class="form-control" placeholder="@ViewBag.Loc["Name"]" />
+                        <span asp-validation-for="Name" class="validation-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Email">@ViewBag.Loc["Email"]</label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="@ViewBag.Loc["Email"]" />
+                        <span asp-validation-for="Email" class="validation-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Subject">@ViewBag.Loc["Subject"]</label>
+                        <input asp-for="Subject" class="form-control" placeholder="@ViewBag.Loc["Subject"]" />
+                        <span asp-validation-for="Subject" class="validation-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Message">@ViewBag.Loc["Message"]</label>
+                        <textarea asp-for="Message" class="form-control" rows="5" placeholder="@ViewBag.Loc["Message"]"></textarea>
+                        <span asp-validation-for="Message" class="validation-error"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-large btn-full">@ViewBag.Loc["Send"]</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

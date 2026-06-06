@@ -1,0 +1,47 @@
+@{
+    ViewBag.Title = ViewBag.Loc["Cart"];
+}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">@ViewBag.Loc["Cart"]</h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div id="cart-content">
+            <div class="empty-cart" id="empty-cart">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-cart-icon">
+                    <circle cx="9" cy="21" r="1"/>
+                    <circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                </svg>
+                <p>@ViewBag.Loc["EmptyCart"]</p>
+                <a href="/Shop" class="btn btn-primary">@ViewBag.Loc["GoToShop"]</a>
+            </div>
+            
+            <div class="cart-items" id="cart-items" style="display: none;">
+                <!-- Cart items will be populated by JavaScript -->
+            </div>
+            
+            <div class="cart-summary" id="cart-summary" style="display: none;">
+                <div class="cart-total">
+                    <span>@ViewBag.Loc["Total"]:</span>
+                    <span class="total-amount" id="total-amount">0 @ViewBag.Loc["Currency"]</span>
+                </div>
+                <form asp-controller="Shop" asp-action="Checkout" method="post">
+                    <button type="submit" class="btn btn-primary btn-large btn-full">@ViewBag.Loc["Checkout"]</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        renderCart();
+    });
+</script>
+}

@@ -1,0 +1,47 @@
+@model IEnumerable<ArtGallery.Models.Painting>
+@{
+    ViewBag.Title = ViewBag.Loc["Portfolio"];
+}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">@ViewBag.Loc["Portfolio"]</h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="filters">
+            <span class="filter-label">@ViewBag.Loc["Categories"]:</span>
+            <div class="filter-buttons">
+                <a href="/Portfolio" class="filter-btn @(ViewBag.CurrentCategory == "All" ? "active" : "")">@ViewBag.Loc["All"]</a>
+                <a href="/Portfolio?category=Landscapes" class="filter-btn @(ViewBag.CurrentCategory == "Landscapes" ? "active" : "")">@ViewBag.Loc["Landscapes"]</a>
+                <a href="/Portfolio?category=Portraits" class="filter-btn @(ViewBag.CurrentCategory == "Portraits" ? "active" : "")">@ViewBag.Loc["Portraits"]</a>
+                <a href="/Portfolio?category=Abstract" class="filter-btn @(ViewBag.CurrentCategory == "Abstract" ? "active" : "")">@ViewBag.Loc["Abstract"]</a>
+                <a href="/Portfolio?category=StillLife" class="filter-btn @(ViewBag.CurrentCategory == "StillLife" ? "active" : "")">@ViewBag.Loc["StillLife"]</a>
+            </div>
+        </div>
+
+        <div class="paintings-grid">
+            @foreach (var painting in Model)
+            {
+                <div class="painting-card">
+                    <div class="painting-image">
+                        <img src="@painting.ImageUrl" alt="@painting.GetTitle(ViewBag.Culture)" onerror="this.src='/images/placeholder.jpg'" />
+                        <div class="painting-overlay">
+                            <a href="/Portfolio/Details/@painting.Id" class="btn btn-small">@ViewBag.Loc["Details"]</a>
+                        </div>
+                        @if (!painting.IsAvailable)
+                        {
+                            <div class="sold-badge">@ViewBag.Loc["Sold"]</div>
+                        }
+                    </div>
+                    <div class="painting-info">
+                        <h3 class="painting-title">@painting.GetTitle(ViewBag.Culture)</h3>
+                        <p class="painting-meta">@painting.Year • @painting.Size</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

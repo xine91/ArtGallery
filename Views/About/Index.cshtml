@@ -1,0 +1,40 @@
+@{
+    ViewBag.Title = ViewBag.Loc["About"];
+}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">@ViewBag.Loc["AboutArtist"]</h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-image">
+                <img src="/images/artist.jpg" alt="Artist" onerror="this.src='/images/placeholder.jpg'" />
+            </div>
+            <div class="about-text">
+                <p class="about-bio">@ViewBag.Loc["ArtistBio"]</p>
+                
+                <h2 class="about-subtitle">@ViewBag.Loc["ArtistPhilosophy"]</h2>
+                <p class="about-philosophy">@ViewBag.Loc["ArtistPhilosophyText"]</p>
+                
+                <div class="about-stats">
+                    <div class="stat">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">@(ViewBag.Culture == "en" ? "Years of Experience" : ViewBag.Culture == "uk" ? "Років досвіду" : ViewBag.Culture == "de" ? "Jahre Erfahrung" : "Лет опыта")</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">200+</span>
+                        <span class="stat-label">@(ViewBag.Culture == "en" ? "Works Created" : ViewBag.Culture == "uk" ? "Створених робіт" : ViewBag.Culture == "de" ? "Geschaffene Werke" : "Созданных работ")</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">@(ViewBag.Culture == "en" ? "Exhibitions" : ViewBag.Culture == "uk" ? "Виставок" : ViewBag.Culture == "de" ? "Ausstellungen" : "Выставок")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

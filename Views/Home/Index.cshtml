@@ -1,0 +1,40 @@
+@{
+    ViewBag.Title = ViewBag.Loc["Home"];
+}
+
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">@ViewBag.Loc["WelcomeTitle"]</h1>
+        <p class="hero-subtitle">@ViewBag.Loc["WelcomeSubtitle"]</p>
+        <div class="hero-buttons">
+            <a href="/Portfolio" class="btn btn-primary">@ViewBag.Loc["ViewPortfolio"]</a>
+            <a href="/Shop" class="btn btn-secondary">@ViewBag.Loc["GoToShop"]</a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">@ViewBag.Loc["FeaturedWorks"]</h2>
+        <div class="paintings-grid">
+            @foreach (var painting in (IEnumerable<ArtGallery.Models.Painting>)ViewBag.FeaturedPaintings)
+            {
+                <div class="painting-card">
+                    <div class="painting-image">
+                        <img src="@painting.ImageUrl" alt="@painting.GetTitle(ViewBag.Culture)" onerror="this.src='/images/placeholder.jpg'" />
+                        <div class="painting-overlay">
+                            <a href="/Portfolio/Details/@painting.Id" class="btn btn-small">@ViewBag.Loc["Details"]</a>
+                        </div>
+                    </div>
+                    <div class="painting-info">
+                        <h3 class="painting-title">@painting.GetTitle(ViewBag.Culture)</h3>
+                        <p class="painting-price">@painting.Price.ToString("N0") @ViewBag.Loc["Currency"]</p>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="section-footer">
+            <a href="/Portfolio" class="btn btn-primary">@ViewBag.Loc["AllWorks"]</a>
+        </div>
+    </div>
+</section>

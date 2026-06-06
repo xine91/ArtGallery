@@ -1,0 +1,43 @@
+@model ArtGallery.Models.Painting
+@{
+    ViewBag.Title = Model.GetTitle(ViewBag.Culture);
+}
+
+<section class="section">
+    <div class="container">
+        <a href="/Shop" class="back-link">← @ViewBag.Loc["Shop"]</a>
+        
+        <div class="painting-details">
+            <div class="painting-details-image">
+                <img src="@Model.ImageUrl" alt="@Model.GetTitle(ViewBag.Culture)" onerror="this.src='/images/placeholder.jpg'" />
+            </div>
+            <div class="painting-details-info">
+                <h1 class="painting-details-title">@Model.GetTitle(ViewBag.Culture)</h1>
+                <p class="painting-details-description">@Model.GetDescription(ViewBag.Culture)</p>
+                
+                <div class="painting-specs">
+                    <div class="spec-row">
+                        <span class="spec-label">@ViewBag.Loc["Year"]:</span>
+                        <span class="spec-value">@Model.Year</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">@ViewBag.Loc["Size"]:</span>
+                        <span class="spec-value">@Model.Size</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">@ViewBag.Loc["Technique"]:</span>
+                        <span class="spec-value">@Model.GetTechnique(ViewBag.Culture)</span>
+                    </div>
+                </div>
+
+                <div class="painting-details-price">
+                    <span class="price-amount large">@Model.Price.ToString("N0") @ViewBag.Loc["Currency"]</span>
+                </div>
+
+                <div class="painting-actions">
+                    <button class="btn btn-primary btn-large add-to-cart" data-id="@Model.Id">@ViewBag.Loc["AddToCart"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
